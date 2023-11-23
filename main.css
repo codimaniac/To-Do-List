@@ -73,8 +73,15 @@ input[type="submit"] {
 }
 
 .task-item > img {
-    margin-right: 1rem;
     cursor: pointer;
+}
+
+.task-item > .checkSquare {
+    margin-right: 1rem;
+}
+
+.task-item > .deleteTask {
+    margin-left: auto;
 }
 
 .task-item > span {

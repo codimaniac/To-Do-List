@@ -8,7 +8,7 @@ const defaultMessage = document.querySelector("#default")
 
 let checkSquares = document.querySelectorAll(".checkSquare");
 
-let manageState = () => {
+let manageCheckState = () => {
   checkSquares = document.querySelectorAll(".checkSquare");
 
   checkSquares.forEach((checkSquare, index) => {
@@ -18,7 +18,7 @@ let manageState = () => {
           checkSquare.src = "./check-square-fill.svg";
           checkSquare.classList.remove("unchecked");
           checkSquare.classList.add("checked");
-          console.log("checked");
+          // console.log("checked");
         }
         
         // The else statement helps to uncheck the task
@@ -36,11 +36,30 @@ let manageState = () => {
   // console.log(checkSquares.length)
 };
 
-function removeDefaultMessage() {
+let deleteIcons = document.querySelectorAll(".deleteTask")
 
+function manageDeleteState() {
+  deleteIcons = document.querySelectorAll(".deleteTask");
+
+  deleteIcons.forEach((deleteIcon, index) => {
+    if (index === deleteIcons.length - 1) {
+      deleteIcon.addEventListener("click", () => {
+        
+        deleteIcon.parentElement.remove()
+
+        removeDefaultMessage()
+      })
+    }
+  })
+  
+}
+
+function removeDefaultMessage() {
   // Removing default message if a task is available
 
-  if (tasks.children.length < 1) {
+  console.log(tasks.children.length)
+
+  if (tasks.children.length === 1) {
     defaultMessage.style.display = "block";
   } else {
     defaultMessage.style.display = "none";
@@ -65,12 +84,20 @@ addTask.addEventListener("click", (e) => {
   task.textContent = newTask.value;
   taskItem.appendChild(task);
 
+  const deleteIcon = document.createElement("img");
+  deleteIcon.classList.add("deleteTask");
+  deleteIcon.setAttribute("src", "./x.svg");
+  deleteIcon.setAttribute("alt", "delete");
+  taskItem.appendChild(deleteIcon);
+
   tasks.appendChild(taskItem);
 
   removeDefaultMessage();
 
   newTask.value = "";
 
-  manageState();
+  manageCheckState();
+
+  manageDeleteState();
 });
 
