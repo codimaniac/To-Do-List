@@ -11,9 +11,9 @@ body {
 
 .to-do-list {
     background-color: white;
-    width: 400px;
-    height: 400px;
-    margin: 100px auto;
+    width: 450px;
+    min-height: 450px;
+    margin: 90px auto;
     padding: 2rem;
     border-radius: 0.5rem;
     box-shadow: 2px 2px 40px 1px #cbcbcb;
@@ -62,8 +62,9 @@ input[type="submit"] {
 .tasks > #default {
     display: block;
     font-style: italic;
-    margin-top: 5rem;
+    margin-top: 7rem;
     text-align: center;
+    color: gray;
 }
 
 .task-item {
