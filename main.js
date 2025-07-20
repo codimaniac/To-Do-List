@@ -18,7 +18,8 @@ let manageCheckState = () => {
           checkSquare.src = "./check-square-fill.svg";
           checkSquare.classList.remove("unchecked");
           checkSquare.classList.add("checked");
-          // console.log("checked");
+          
+          toastr.success("Task marked as completed!");
         }
         
         // The else statement helps to uncheck the task
