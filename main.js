@@ -95,6 +95,7 @@ function removeDefaultMessage() {
 
 addTask.addEventListener("click", (e) => {
   e.preventDefault();
+  
 
   if (editingTask) {
     // Update existing task
@@ -102,6 +103,13 @@ addTask.addEventListener("click", (e) => {
     editingTask = null; // Exit editing mode
     addTask.value = "Add Task"; // Reset button text
     newTask.value = "";
+    toastr.success("Task updated successfully!");
+    return;
+  }
+
+  if (newTask.value.trim() === "") {
+    toastr.error("Please enter a task.");
+    
     return;
   }
 
@@ -141,5 +149,7 @@ addTask.addEventListener("click", (e) => {
   manageEditState();
 
   manageDeleteState();
+
+  toastr.success("Task added successfully!");
 });
 
