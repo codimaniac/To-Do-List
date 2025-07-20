@@ -36,6 +36,31 @@ let manageCheckState = () => {
   // console.log(checkSquares.length)
 };
 
+let editIcons = document.querySelectorAll(".editTask")
+
+let editingTask = null; // Track the task being edited
+
+function manageEditState() {
+  editIcons = document.querySelectorAll(".editTask");
+
+  editIcons.forEach((editIcon, index) => {
+    if (index === editIcons.length - 1) {
+      editIcon.addEventListener("click", () => {
+        const taskToBeEdited = editIcon.previousElementSibling;
+        newTask.value = taskToBeEdited.textContent;
+        editingTask = taskToBeEdited; // Set editing mode
+        addTask.value = "Update Task"; // Change button text
+        console.log(taskToBeEdited.textContent);
+
+        // Live update as you type
+        newTask.addEventListener('input', () => {
+          if (editingTask) editingTask.textContent = newTask.value;
+        });
+      })
+    }
+  })
+}
+
 let deleteIcons = document.querySelectorAll(".deleteTask")
 
 function manageDeleteState() {
@@ -57,7 +82,7 @@ function manageDeleteState() {
 function removeDefaultMessage() {
   // Removing default message if a task is available
 
-  console.log(tasks.children.length)
+  // console.log(tasks.children.length)
 
   if (tasks.children.length === 1) {
     defaultMessage.style.display = "block";
@@ -70,6 +95,15 @@ function removeDefaultMessage() {
 
 addTask.addEventListener("click", (e) => {
   e.preventDefault();
+
+  if (editingTask) {
+    // Update existing task
+    editingTask.textContent = newTask.value;
+    editingTask = null; // Exit editing mode
+    addTask.value = "Add Task"; // Reset button text
+    newTask.value = "";
+    return;
+  }
 
   const taskItem = document.createElement("span");
   taskItem.classList.add("task-item");
@@ -84,6 +118,12 @@ addTask.addEventListener("click", (e) => {
   task.textContent = newTask.value;
   taskItem.appendChild(task);
 
+  const editIcon = document.createElement("img");
+  editIcon.classList.add("editTask");
+  editIcon.setAttribute("src", "./edit-pen-icon.svg");
+  editIcon.setAttribute("alt", "edit");
+  taskItem.appendChild(editIcon);
+
   const deleteIcon = document.createElement("img");
   deleteIcon.classList.add("deleteTask");
   deleteIcon.setAttribute("src", "./x.svg");
@@ -97,6 +137,8 @@ addTask.addEventListener("click", (e) => {
   newTask.value = "";
 
   manageCheckState();
+
+  manageEditState();
 
   manageDeleteState();
 });

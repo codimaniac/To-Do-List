@@ -80,8 +80,14 @@ input[type="submit"] {
     margin-right: 1rem;
 }
 
-.task-item > .deleteTask {
+.task-item > .editTask {
+    width: 16px;
+    height: 16px;
     margin-left: auto;
+}
+
+.task-item > .deleteTask {
+    margin-left: 1rem;
 }
 
 .task-item > span {
