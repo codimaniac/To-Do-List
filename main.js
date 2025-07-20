@@ -73,6 +73,8 @@ function manageDeleteState() {
         
         deleteIcon.parentElement.remove()
 
+        toastr.success("Task deleted successfully!");
+
         removeDefaultMessage()
       })
     }
